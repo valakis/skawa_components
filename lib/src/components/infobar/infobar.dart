@@ -1,9 +1,8 @@
 import 'dart:html';
-import 'package:angular2/angular2.dart';
-import 'package:angular_components/src/components/glyph/glyph.dart';
-import 'package:angular_components/src/components/material_button/material_button.dart';
-import 'package:angular_components/src/utils/async/async.dart'
-    show LazyEventEmitter;
+import 'dart:async';
+import 'package:angular/angular.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 
 /// An Inforbar is compositing an (icon as button)[https://material.io/components/web/catalog/buttons/icon-toggle-buttons/] and
 /// an arbitrary component. Infobar is designed to display small notifications, important messages to the user, *in-context*.
@@ -26,13 +25,13 @@ import 'package:angular_components/src/utils/async/async.dart'
 /// - `trigger: Event` -- Published when the `icon` is triggered.
 ///
 @Component(
-    selector: 'skawa-infobar',
-    templateUrl: 'infobar.html',
-    styleUrls: const ['infobar.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    directives: const [GlyphComponent, MaterialButtonComponent],
-    inputs: const ['icon', 'url'],
-    outputs: const ['trigger'])
+  selector: 'skawa-infobar',
+  templateUrl: 'infobar.html',
+  styleUrls: const ['infobar.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  directives: const [MaterialIconComponent, MaterialButtonComponent],
+  inputs: const ['icon', 'url'],
+)
 class SkawaInfobarComponent {
   // TODO: dismiss
 
@@ -43,7 +42,8 @@ class SkawaInfobarComponent {
   @ViewChild('primaryAction')
   MaterialButtonComponent primaryActionButton;
 
-  LazyEventEmitter<UIEvent> get trigger => primaryActionButton.trigger;
+  @Output()
+  Stream<UIEvent> get trigger => primaryActionButton.trigger;
 
   void navigate() {
     if (url != null) window.location.href = url;

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:html';
-import 'package:angular2/angular2.dart';
-
-import 'package:angular_components/src/components/glyph/glyph.dart';
-import 'package:angular_components/src/components/material_button/material_button.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_icon/material_icon.dart';
 
 /// Appbar component. [See more at](https://material.io/guidelines/layout/structure.html#structure-app-bar)
 ///
@@ -18,27 +17,19 @@ import 'package:angular_components/src/components/material_button/material_butto
 /// __Properties:__
 /// - `showNavToggle: bool` -- Whether to display nav toggle. Defaults to true.
 ///
-@Component(
-    selector: 'skawa-appbar',
-    templateUrl: 'appbar.html',
-    styleUrls: const [
-      'appbar.css'
-    ],
-    inputs: const [
-      'showNavToggle'
-    ],
-    outputs: const [
-      'navToggle'
-    ],
-    directives: const [
-      MaterialButtonComponent,
-      GlyphComponent,
-      NgIf,
-    ])
+@Component(selector: 'skawa-appbar', templateUrl: 'appbar.html', styleUrls: const [
+  'appbar.css'
+], inputs: const [
+  'showNavToggle'
+], directives: const [
+  MaterialButtonComponent,
+  MaterialIconComponent,
+  NgIf,
+])
 class SkawaAppbarComponent implements OnDestroy {
-  StreamController _navToggleController =
-      new StreamController<MouseEvent>.broadcast();
+  StreamController _navToggleController = new StreamController<MouseEvent>.broadcast();
 
+  @Output()
   Stream get navToggle => _navToggleController.stream;
 
   bool showNavToggle = true;

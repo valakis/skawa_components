@@ -1,6 +1,6 @@
-import 'package:angular2/angular2.dart';
-import 'package:angular_components/src/components/glyph/glyph.dart';
+import 'package:angular/angular.dart';
 import '../../util/attribute.dart' as attrib;
+import 'package:angular_components/material_icon/material_icon.dart';
 
 /// Toolbar item. See more [about normal lists](https://material.io/guidelines/components/lists.html#) or
 /// [about control lists](https://material.io/guidelines/components/lists-controls.html)
@@ -25,7 +25,7 @@ import '../../util/attribute.dart' as attrib;
     styleUrls: const ['sidebar_item.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     inputs: const ['icon', 'textOnly'],
-    directives: const [GlyphComponent, NgIf, NgClass],
+    directives: const [MaterialIconComponent, NgIf, NgClass],
     host: const {
       '[attr.textOnly]': 'textOnly',
     })
